@@ -1,0 +1,289 @@
+\documentclass[12pt, oneside, a4paper]{article}
+
+\usepackage[utf8]{inputenc}     % kodowanie na UTF-8
+
+%##############################################################################
+% Global variables
+\newcommand{\globalFullAuthor}{Maciej Sypień}          % Pełna nazwa autora pracy
+\newcommand{\globalShortAuthor}{M. Sypień}         % Autor - zwięzła forma wydruku
+\newcommand{\globalFullTitle}{Zaawansowana egzemplifikacja teorii zależności XYZ}
+\newcommand{\globalFullUniversity}{Uniwersytet Ekonomiczny w Krakowie}   % Pełna nazwa uniwersytetu
+\newcommand{\globalShortUniversity}{UEK}  % Skrócona nazwa uniwersytetu
+\newcommand{\globalDepartment}{Wydział Zarządzania}  % Wydział
+\newcommand{\globalKeywords}{nauka, praca, latex, zadanie}
+\newcommand{\globalDegreeprogramme}{Informatyka Stosowana}  % Kierunek studiów
+\newcommand{\globalThesisType}{Zadanie semestralne}  % Typ pracy dyplomowej
+\newcommand{\globalVersion}{1.0.0}  % wersja pracy - przydatne przy systemie kontroli wersji
+
+%##############################################################################
+% Additional packages
+\usepackage[polish]{babel}
+\usepackage{csquotes}
+\usepackage[T1]{fontenc}           % ,,europejski'' układ fontów (Cork)
+%\usepackage[OT4,plmath]{polski}   % Zestaw czcionek
+\usepackage{times}                 % Times - Czcionki wektorowe
+\usepackage{graphicx}              % Wstawianie grafiki
+\usepackage{geometry}              % 
+\usepackage[usenames]{color}       % Palety kolorów zdefionwanych
+\usepackage{fancyhdr}              %
+%\usepackage{titlesec}              %
+%\usepackage{tocloft}               %
+\usepackage{amsmath}               % Moduł matematyczny AMS
+\usepackage{amsfonts}              % pakiet czcionek AMS
+\usepackage{amsthm}                % Definicje matematyczne AMS
+\usepackage[dvipsnames,svgnames]{xcolor}    % Zestaw kolorów             
+\usepackage{indentfirst}           % uzyskanie wcięcia przy pierwszym akapicie
+\usepackage{nameref}               % pakiet referencji do pełnych nazw rozdziałów
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{footnote}
+\usepackage{lipsum}              % pakiet odpowiedzialny za `lorem ipsum`
+\usepackage{indentfirst}   % uzyskanie wcięcia przy pierwszym akapicie
+\usepackage[
+  font=small,
+  format=hang,
+  labelformat=simple,
+  justification=justified,
+  labelsep=colon]{caption}       % pakiet dla podpisów np: dla lstlintings
+\usepackage{nameref}       % pakiet referencji do pełnych nazw rozdziałów
+\usepackage{enumerate}
+\usepackage{multirow}      % pakiet dla łaczenia wierszy w tabelach
+\usepackage[framemethod=tikz]{mdframed}     % pakiet zastępujący mało modalny \fbox
+\usepackage{listings}      % pakiet dla kodów zródłowych
+\usepackage[dvipsnames]{xcolor}
+
+%##############################################################################
+% Zdefiniowane kolory dla formatowania linków, bibliografi oraz spisu treści
+\definecolor{wine}{RGB}{149,56,56}
+\definecolor{wine-stain}{RGB}{200,125,125}
+\definecolor{grass-green}{RGB}{53,161,103}
+\definecolor{ocean-blue}{RGB}{9,63,97}
+
+
+%##############################################################################
+% Dodanie komendy dla caption + source
+\newcommand*{\captionsource}[2]{%
+  \caption[{#1}]{%
+    #1%
+    \\\hspace{\linewidth}%
+    {Źródło:} #2%
+  }%
+}
+
+%##############################################################################
+% Wydruk kodu/tekstu w ramce
+\newmdenv[
+    skipabove=0.2cm,
+    skipbelow=0,
+    nobreak=true]{outputbox}
+
+
+%##############################################################################
+% Zdefiniowanie nowego, dodatkowego jezyka
+% \lstdefinelanguage{LaTeX}{
+%   keywords={\textbf, \$, \$\$, \int, \noindent,},
+%   keywordstyle=\color{blue}\bfseries,
+%   ndkeywords={class, export, boolean, throw, implements, import, this},
+%   ndkeywordstyle=\color{darkgray}\bfseries,
+%   identifierstyle=\color{black},
+%   sensitive=false,
+%   comment=[l]{\%},
+%   morecomment=[s]{/*}{*/},
+%   commentstyle=\color{purple}\ttfamily,
+%   stringstyle=\color{red}\ttfamily,
+%   morestring=[b][\color{ForestGreen}]\$,
+%   morestring=[b][\color{ForestGreen}]\$\$
+% }
+
+%##############################################################################
+% Zdefiniowanie nowego, dodatkowego stylu
+\lstdefinestyle{LaTeX2e}{
+  language=[LaTeX]TeX,
+  keywordstyle=\color{Red},
+  basicstyle=\ttfamily,
+  alsoletter={\#},
+  morekeywords={chapter},
+  morestring=[b][\color{ForestGreen}]\$,
+  morestring=[b][\color{ForestGreen}]\$\$
+}
+
+
+\lstdefinestyle{Bash}{
+  language=Bash,
+  keywordstyle=\color{MidnightBlue},
+  basicstyle=\ttfamily,
+  alsoletter={-},
+  sensitive=false,
+  morekeywords={sudo, wget, chmod, dpkg, git},
+  %literate={\$}{{\textcolor{MidnightBlue}{\$}}}1
+  %         {-}{{\textcolor{MidnightBlue}{-}}}1
+  %         {~}{{\textcolor{MidnightBlue}{\textasciitilde}}}1,
+}
+
+
+%##############################################################################
+% Ustawienie opcji dla wyświetlania kodów źródłowych
+% Wiecej: pakiet listings s. 26
+\lstset{
+  literate={ą}{{\k{a}}}1
+           {ć}{{\'c}}1
+           {ę}{{\k{e}}}1
+           {ó}{{\'o}}1
+           {ń}{{\'n}}1
+           {ł}{{\l{}}}1
+           {ś}{{\'s}}1
+           {ź}{{\'z}}1
+           {ż}{{\.z}}1
+           {Ą}{{\k{A}}}1
+           {Ć}{{\'C}}1
+           {Ę}{{\k{E}}}1
+           {Ó}{{\'O}}1
+           {Ń}{{\'N}}1
+           {Ł}{{\L{}}}1
+           {Ś}{{\'S}}1
+           {Ź}{{\'Z}}1
+           {Ż}{{\.Z}}1,
+  %language=[LaTeX]TeX,
+  style=LaTeX2e,
+  captionpos=t,
+  tabsize=2,
+  frame=lines,
+  keywordstyle=\color{MidnightBlue},
+  commentstyle=\color{OliveGreen},
+  stringstyle=\color{Red},
+  numbers=left,
+  numberstyle=\small,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\ttfamily,
+  emph={label},
+}
+
+
+%##############################################################################
+% Zdefiniowanie własnych nazw dla poszczególnych definicji, twierdzeń itp
+\theoremstyle{plain}
+\newtheorem{thm}{Twierdzenie}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Założenie}
+\newtheorem*{cor}{Wniosek}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definicja}
+\newtheorem{conj}{Przypuszczenie}[section]
+\newtheorem{exmp}{Przykład}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+
+%---------------------------------------------------------------------------
+
+% Ustawienie linkowania dokumetu oraz elementów wyświetlania pdfa (4.7.4 z latex w 129 minut)
+\usepackage{hyperref}
+\hypersetup{
+  unicode=true,           % używać znaków z alfabetów niełacińskich zakładkach Acrobata
+  pdftoolbar=true,        % show Acrobat’s toolbar?
+  pdfmenubar=true,        % show Acrobat’s menu?
+  pdffitwindow=false,     % window fit to page when opened
+  pdfstartview={FitH},    % fits the width of the page to the window
+  pdftitle={},                % title
+  pdfauthor={\globalFullAuthor},  % author
+  pdfsubject={Subject},       % subject of the document
+  pdfcreator={\globalFullAuthor}, % creator of the document
+  pdfproducer={\globalFullAuthor},     % producer of the document
+  pdfkeywords={\globalKeywords}, % list of keywords
+  pdfnewwindow=true,          % links in new window
+  linktoc=page,                % Ustawienie linków dla bibliografi (none, all, page, section)
+  colorlinks=true,            % false: boxed links; true: colored links
+  linkcolor=wine,             % color of internal links (change box color with linkbordercolor)
+  citecolor=grass-green,      % color of links to bibliography
+  filecolor=magenta,          % color of file links
+  urlcolor=ocean-blue,        % color of external links
+}
+
+%##############################################################################
+% Definicje własnych, nowych makr
+
+% poniższe makra wymagają pakietu 'xcolor'
+\newcommand{\red}[1]{{\color{RedOrange}{#1}}}
+\newcommand{\yellow}[1]{{\color{Dandelion}{#1}}}
+\newcommand{\green}[1]{{\color{LimeGreen}{#1}}}
+\newcommand{\RED}[1]{{\colorbox{RedOrange}{#1}}}
+\newcommand{\YELLOW}[1]{{\colorbox{Dandelion}{#1}}}
+\newcommand{\GREEN}[1]{{\colorbox{LimeGreen}{#1}}}
+
+%##############################################################################
+% Lowercase \nameref = \lnameref
+\newcommand{\lnameref}[1]{%
+\bgroup
+\let\nmu\MakeLowercase
+\nameref{#1}\egroup}
+
+% First UpperCase then lowercase = \fnameref
+\newcommand{\fnameref}[1]{%
+\bgroup
+\def\nmu{\let\nmu\MakeLowercase}%
+\nameref{#1}\egroup}
+
+% helper for lowercase newcommands
+\newcommand{\nmu}{}
+
+%##############################################################################
+% Section Author
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace2*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
+%##############################################################################
+
+\title{
+	\LARGE{\globalFullUniversity}\\
+	\vspace{0,3cm}
+	\Large{\globalDepartment}\\
+    \vspace{3cm}
+	\Huge{\globalFullTitle}
+	\vspace{2cm}
+}
+\author{\globalFullAuthor}
+\date{\today}
+
+%##############################################################################
+% Bibliography options
+\usepackage[
+    style=authoryear, % numeric, alphabetic, authoryear, 
+    backend=biber,]{biblatex}
+\addbibresource{bibliografia.bib}  % dołączenie plików bibliografii
+
+
+%##############################################################################
+\begin{document}
+\nocite{*}     % wszystkie pozycje z bibliografii
+\maketitle     % tworzy tytuł + imiona autorów + datę
+\vspace{1cm}
+
+\begin{abstract}
+Dokument ten prezentuje całkowicie zmyślony przykład zadania domowego, pracy kontrolnej, semestralnej, ect. w~oparciu o system składu tekstu \LaTeX{} wraz z przykładem pliku do zarządzania pozycjami bibliograficznymi.\\ 
+Większość treści nie ma większego sensu z uwagi na zastosowanie pakietu \texttt{lipsum} oraz drobnych wycinków moim tekstów.
+
+Praca ma stanowić przykład prostego użycia obrazków, tabel, list wypunktowanych, odnośników do rozdziałów,  odnośników do pozycji bibliograficznych ect. Projekt ten jest wygodnym startem do pisania własnych dokumentów w LaTeXu.
+\end{abstract}
+
+\clearpage
+\tableofcontents     % wstawia spis treści
+
+\include{sec_section_one}
+%\include{sec_section_two}
+\include{sec_section_three}
+\include{sec_section_last}
+
+\listoffigures
+\clearpage
+\printbibliography
+
+\end{document}
