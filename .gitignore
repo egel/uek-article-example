@@ -1,6 +1,9 @@
 ## Markdown compilation files
 README.html
 
+## Vim, gedit temp files
+*~
+
 ## Texmaker session files
 *.tks
 
