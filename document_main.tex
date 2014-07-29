@@ -12,7 +12,7 @@
 \newcommand{\globalDepartment}{Wydział Zarządzania}  % Wydział
 \newcommand{\globalKeywords}{nauka, praca, latex, zadanie}
 \newcommand{\globalDegreeprogramme}{Informatyka Stosowana}  % Kierunek studiów
-\newcommand{\globalThesisType}{Zadanie semestralne}  % Typ pracy dyplomowej
+\newcommand{\globalDocumentType}{Zadanie semestralne}  % Typ pracy dyplomowej
 \newcommand{\globalVersion}{1.0.0}  % wersja pracy - przydatne przy systemie kontroli wersji
 
 %##############################################################################
@@ -177,30 +177,33 @@
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
 
-%---------------------------------------------------------------------------
-
-% Ustawienie linkowania dokumetu oraz elementów wyświetlania pdfa (4.7.4 z latex w 129 minut)
+%##############################################################################
+% Ustawienie linkowania dokumetu oraz elementów wyświetlania pdfa
+% (Rozdział 4.7.4 z latex w 129 minut)
 \usepackage{hyperref}
 \hypersetup{
-  unicode=true,           % używać znaków z alfabetów niełacińskich zakładkach Acrobata
+  unicode=true,
+  pdfencoding=unicode,
+  pdfencoding=auto,
   pdftoolbar=true,        % show Acrobat’s toolbar?
   pdfmenubar=true,        % show Acrobat’s menu?
   pdffitwindow=false,     % window fit to page when opened
   pdfstartview={FitH},    % fits the width of the page to the window
-  pdftitle={},                % title
-  pdfauthor={\globalFullAuthor},  % author
-  pdfsubject={Subject},       % subject of the document
-  pdfcreator={\globalFullAuthor}, % creator of the document
-  pdfproducer={\globalFullAuthor},     % producer of the document
+  pdftitle={\globalFullTitle},          % title
+  pdfauthor={\globalFullAuthor},        % author
+  pdfsubject={\globalDocumentType},    % subject of the document
+  pdfcreator={\globalFullAuthor},       % creator of the document
+  pdfproducer={\globalFullAuthor},      % producer of the document
   pdfkeywords={\globalKeywords}, % list of keywords
   pdfnewwindow=true,          % links in new window
-  linktoc=page,                % Ustawienie linków dla bibliografi (none, all, page, section)
+  linktoc=page,               % Ustawienie linków dla bibliografi (none, all, page, section)
   colorlinks=true,            % false: boxed links; true: colored links
   linkcolor=wine,             % color of internal links (change box color with linkbordercolor)
-  citecolor=grass-green,      % color of links to bibliography
-  filecolor=magenta,          % color of file links
-  urlcolor=ocean-blue,        % color of external links
+  citecolor=PineGreen,        % color of links to bibliography
+  filecolor=Maroon,           % color of file links
+  urlcolor=MidnightBlue,      % color of external links
 }
+
 
 %##############################################################################
 % Definicje własnych, nowych makr
